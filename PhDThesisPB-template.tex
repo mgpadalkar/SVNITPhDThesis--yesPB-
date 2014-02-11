@@ -1,0 +1,140 @@
+%------------------------------------------------------------------------------
+% A template for using the SVNITPhDThesisPB.cls (v 13.12.11) class file. This is based on the
+% template used by Dr. Shailaja Patil.
+%------------------------------------------------------------------------------
+% author : Milind Padalkar (milind.padalkar@gmail.com)
+% supported by: Dr. Shailaja Patil (shailaja.patil11@gmail.com)
+% motivation: All my friends in M.Tech. & PhD
+% first created : Created as SVNITPhDReport.cls sometime in 2010.
+% last modified on : 11-12-2013
+% version : 13.12.11
+%------------------------------------------------------------------------------
+% This template is provided without any warranty and should be modified by the
+% user as per requirement.
+%------------------------------------------------------------------------------
+% To remove the color for hyperlinks set the line 96 in SVNITPhDThesis.cls as 
+% "colorlinks=false," from "colorlinks=true,".
+%------------------------------------------------------------------------------
+% Strictly compile using: LaTeX=>PS=>PDF
+%------------------------------------------------------------------------------
+
+\documentclass{SVNITPhDThesisPB}
+
+% Necessary packages (Do not comment these)
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage[titletoc]{appendix}
+\usepackage{acronym}
+\usepackage{fancyhdr}
+
+%Preamble
+
+%Do not omit the following fields
+\thesisType{Thesis} %Type (Ex. Thesis)
+\atitle{Mr.} %Author title. Valid entries : Mr. Ms. Mrs.
+\author{Your Name} %Author name
+\title{Thesis Title} %Report title
+\dept{Computer Engineering} %Department name
+\regno{DYYCOXXX} %Registration number 
+\stitleI{Dr.} %Supervisor title. Examples : Dr., Prof.
+\supervisorI{Supervisor's Name} %Supervisor name
+\supervisorD{Supervisor's Designation} %Supervisor name
+\addressInstN{Sardar Vallabhbhai} %Institute name line1
+\addressInstI{S. V.} %Institute name's initials
+\addressInstD{National Institute of Technology} %Institute name line2
+\addressInstP{Surat} %Institute name line3 (Place)
+\countryInst{India} % Institute country
+\pinInst{395007} % PIN code of the Institute
+\acMonth{October} %Month
+\acYear{2013 -- 2014} %Academic Year
+\calYear{2013} %Calander Year
+\PhDYears{2009 -- 2014} %PhD Years
+\instlogo{./Figures/SVNITlogo} %Institute logo file path
+
+% For natural bibliography
+\usepackage[numbers,sort&compress]{natbib}
+\renewcommand{\bibfont}{\footnotesize}
+\setlength{\bibsep}{5.0pt}
+
+% User packages (You can add as many as you want)
+\usepackage{amssymb}  %  for double struck characters
+\usepackage{subfigure} % for subfigures
+\usepackage{enumerate}
+
+
+%\usepackage{enumitem}
+\begin{document}
+
+\addpageborder
+
+%%Create the title page
+\maketitle
+
+\pagenumbering{roman}
+\setcounter{page}{2}
+
+% Create the decleration page
+\putdecleration
+
+% Create the certificate page
+\putcertificate
+
+% Create the approval page
+\putapproval
+
+% Create the acknowledgement page
+\putsvnitack{
+\input{./Sections/ack}
+}
+
+% Create the abstract page
+\putsvnitabstract{
+\input{./Sections/abstract}
+}
+
+% Table of contents
+\tableofcontents\newpage
+
+% List of figures
+\addcontentsline{toc}{section}{List of Figures} % Entery in ToC
+\listoffigures\newpage
+
+% List of tables
+\addcontentsline{toc}{section}{List of Tables} % Entry in ToC
+\listoftables\newpage
+
+% List of Acronyms
+\addcontentsline{toc}{section}{List of Acronyms} % Entry in ToC
+\input{./Sections/Acr}\newpage
+
+% List of Symbols
+\addcontentsline{toc}{section}{List of Symbols} % Entry in ToC
+\input{./Sections/symb}\newpage
+
+\clearpageborder
+
+% To change page number and style at any time, use the following
+%\pagenumbering{roman}
+%\setcounter{page}{13}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% Creating header
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+
+% Your thesis chapters
+
+% Introduction
+\include{./Chapter1/ch1}
+
+% Bibliography
+\bibliographystyle{IEEEtranN}
+\bibliography{SVNITPhDbibtex}
+\newpage
+
+% List of publications
+\pagestyle{plain}
+\addcontentsline{toc}{chapter}{List of Publications} % Entery in ToC
+\input{./Sections/our_pub}
+
+\end{document}

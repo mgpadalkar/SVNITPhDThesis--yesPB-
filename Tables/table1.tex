@@ -1,0 +1,13 @@
+ \caption{My first table} % title of Table
+  \label{table:t1} % is used to refer this table in the text
+  \centering % used for centering table
+ \begin{tabular}{l l l l l} % centered columns (4 columns)
+ \hline\hline %inserts double horizontal lines
+Technique   &H/W  & Distance  & Limitations \\ [0.5ex] % inserts table heading
+ \hline % inserts single horizontal line
+RSSI     & No              & Few Meters  & Noise, Interference in range\\
+ToA      & Yes             & Few Cms     & Nodes synchronization\\
+TDoA     & Ultrasound Txr  & Few Meters  & Maximum distance of work\\
+AoA      & Set of receivers & few degrees & Work on small sensor nodes\\[0.5ex] % [1ex] adds vertical space
+ \hline %inserts single line
+ \end{tabular}

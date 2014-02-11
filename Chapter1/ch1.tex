@@ -1,0 +1,41 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+Your first chapter. Go on and place some figures as given below.
+\begin{figure}[!ht]
+ 	\centering
+ 	\subfigure[something here]{
+ 	\fbox
+ 	{\includegraphics[width = 0.45\textwidth]{./Figures/SVNITlogo}}
+ 		\label{fig:sf1}
+ 	}
+ 	\subfigure[without border]{
+ 	 {\includegraphics[width=0.45\textwidth]{./Figures/SVNITlogo}}
+ 		\label{fig:sf2}
+ 	}
+ 	\caption[Use this if required, which goes in `list of figures']{The caption is here. I can refer to the subfigures \subref{fig:sf1} and \subref{fig:sf2}. In case the subcaption-number i.e. \subref{fig:sf1} is not to be displayed above, then do not use [ ] in the subfigure command.}
+ 	\label{fig:f1}
+\end{figure}
+ 
+I can also refer to the sub-equations using \ref{fig:sf1} and \ref{fig:sf2} in figure \ref{fig:f1}. Nothing to say about the references. You could refer this way \cite{areport,Hill,MATLAB} or this way \citet{Akyildiz}. The citet command is possible due to the ``natbib'' package and ``IEEETranN.bst'' file.
+
+\section{First Section}
+Lets move ahead with tables.
+
+\begin{table}[ht!]
+	\input{./Tables/table1}
+\end{table}
+ 
+I can always refer this table \ref{table:t1} using its label. We can include the equations as well. Both environments viz. begin\{equation\} -- end\{equation\} and begin\{eqnarray\} -- end\{eqnarray\} are available. I personally prefer the later one. An example is given below in equation \ref{eq:e1}.
+
+\begin{eqnarray}
+x(t) = \left\{
+	\begin{array}{ll}
+		0, & \mbox{if}\ t<0, \\
+		1, & \mbox{otherwise.}
+	\end{array}
+\right.
+\label{eq:e1}
+\end{eqnarray}
+
+That's all from me. You may explore as much as you want.
