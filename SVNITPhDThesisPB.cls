@@ -5,9 +5,13 @@
 % supported by: Dr. Shailaja Patil (shailaja.patil11@gmail.com)
 % motivation: All my friends in M.Tech. & PhD
 % first created : Created as SVNITPhDReport.cls sometime in 2010.
-% last modified on : 11-12-2013
-% version : 13.12.11
-% Adds page border to initial pages. Requires compilation using LaTeX=>PS=PDF
+% last modified on : 03-01-2016
+% version : 16.01.03
+%------------------------------------------------------------------------------
+% Update will allow the users to use PDFLatex command instead of using LaTeX=>PS=PDF
+% Thanks to Bhavesh Borisaniya for helping me with this. The update is based on
+% the link: http://tex.stackexchange.com/questions/113597/getting-a-particular-kind-of-page-border-using-background-package
+%------------------------------------------------------------------------------
 % based on: SVNITPhDReport.cls v12.11.20 used by Dr. Shailaja Patil
 %------------------------------------------------------------------------------
 % This class file is provided without any warranty and may be modified by the users at their own risk.
@@ -111,29 +115,87 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+%%--------------------------------------------------------------------------------------------
+%% No more required
+%%For page borders using PSTRICKS
+%\RequirePackage{pst-node}% http://ctan.org/pkg/pstricks
+%\RequirePackage{eso-pic}% http://ctan.org/pkg/eso-pic
+%
+%%Custom border page command
+%\newcommand{\addpageborder}{
+%	\AddToShipoutPictureBG{%
+%		\begin{pspicture}(\paperwidth,\paperheight)
+%			\psset{xunit=\the\paperwidth,yunit=\the\paperheight,nodesep=1.5cm}
+%			\pnode(1,1){page.northeast}%
+%			\pnode(0,0){page.southwest}%
+%			%In
+%			\psframe[cornersize=relative,linestyle=solid,linewidth=3pt,linecolor=bordercol,framearc=0.0](0.060,0.044)(0.930,0.955)
+%			%Out
+%			\psframe[cornersize=relative,linestyle=solid,linewidth=1pt,linecolor=bordercol,framearc=0.0](0.056,0.040)(0.934,0.959)			
+%		\end{pspicture}
+%	}
+%}
+%
+%%Clear border for a page
+%\newcommand{\clearpageborder}{
+%	\ClearShipoutPicture
+%}
+%%--------------------------------------------------------------------------------------------
 
-%For page borders using PSTRICKS
-\RequirePackage{pst-node}% http://ctan.org/pkg/pstricks
-\RequirePackage{eso-pic}% http://ctan.org/pkg/eso-pic
-
-%Custom border page command
+%Custom border page command (replaced since v. 16.01.03)
+\RequirePackage{tikz}
+\RequirePackage{background}
+\usetikzlibrary{calc}
+\backgroundsetup{
+	scale=1,
+	opacity=1,
+	angle=0,
+	color=black,
+	contents={}
+}	
 \newcommand{\addpageborder}{
-	\AddToShipoutPictureBG{%
-		\begin{pspicture}(\paperwidth,\paperheight)
-			\psset{xunit=\the\paperwidth,yunit=\the\paperheight,nodesep=1.5cm}
-			\pnode(1,1){page.northeast}%
-			\pnode(0,0){page.southwest}%
-			%In
-			\psframe[cornersize=relative,linestyle=solid,linewidth=3pt,linecolor=bordercol,framearc=0.0](0.060,0.044)(0.930,0.955)
-			%Out
-			\psframe[cornersize=relative,linestyle=solid,linewidth=1pt,linecolor=bordercol,framearc=0.0](0.056,0.040)(0.934,0.959)			
-		\end{pspicture}
+	\SetBgScale{1}
+	\SetBgAngle{0}
+	\SetBgColor{bordercol}
+	\SetBgOpacity{1}
+	\SetBgContents{
+		\begin{tikzpicture}[overlay,remember picture]
+		
+		\ifpdf
+		
+			%------------------------------------------------
+			% For use with LATEX=>PDF (pdflatex) command
+			\draw [line width=3pt]
+			($ (current page.north west) + (1.2cm,-1.2cm) $)
+			rectangle
+			($ (current page.south east) + (-1.2cm,1.2cm) $);
+			\draw [line width=1pt]
+			($ (current page.north west) + (1.35cm,-1.35cm) $)
+			rectangle
+			($ (current page.south east) + (-1.35cm,1.35cm) $); 
+			%------------------------------------------------
+			
+		\else
+			%------------------------------------------------
+			% For use with LATEX=>PS=>PDF command
+			\draw [line width=3pt]
+			($ (current page.north west) + (-6.78cm,11.12cm) $)
+			rectangle
+			($ (current page.south east) + (-9.15cm,13.55cm) $);
+			\draw [line width=1pt]
+			($ (current page.north west) + (-6.58cm,10.95cm) $)
+			rectangle
+			($ (current page.south east) + (-9.35cm,13.68cm) $); 
+			%------------------------------------------------	
+		\fi	
+		
+		\end{tikzpicture}
 	}
 }
 
-%Clear border for a page
+%Clear border for a page (replaced since v. 16.01.03)
 \newcommand{\clearpageborder}{
-	\ClearShipoutPicture
+	\SetBgContents{}
 }
 
 % For numbering subsubsections
